@@ -1,6 +1,7 @@
 package com.morihacky.android.rxjava.fragments;
 
 import android.support.v4.app.Fragment;
+//import android.app.Fragment;
 import com.morihacky.android.rxjava.MyApp;
 import com.squareup.leakcanary.RefWatcher;
 

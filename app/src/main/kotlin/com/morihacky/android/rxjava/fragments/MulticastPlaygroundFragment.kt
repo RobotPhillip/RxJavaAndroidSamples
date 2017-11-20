@@ -15,6 +15,7 @@ import com.jakewharton.rx.replayingShare
 import com.morihacky.android.rxjava.R
 import io.reactivex.Observable
 import io.reactivex.disposables.Disposable
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class MulticastPlaygroundFragment : BaseFragment() {
@@ -30,7 +31,7 @@ class MulticastPlaygroundFragment : BaseFragment() {
     private var disposable1: Disposable? = null
     private var disposable2: Disposable? = null
 
-    override fun onCreateView(inflater: LayoutInflater?,
+    override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val layout = inflater!!.inflate(R.layout.fragment_multicast_playground, container, false)
@@ -102,7 +103,12 @@ class MulticastPlaygroundFragment : BaseFragment() {
 
     private fun _setupLogger() {
         logs = ArrayList<String>()
-        adapter = LogAdapter(activity, ArrayList<String>())
+        val checkedActivity = activity
+        if (checkedActivity == null) {
+            Timber.e(NullPointerException("missing fragment activity"))
+            return
+        }
+        adapter = LogAdapter(checkedActivity, ArrayList<String>())
         logList.adapter = adapter
     }
 

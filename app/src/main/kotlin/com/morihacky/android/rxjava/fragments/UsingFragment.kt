@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import com.morihacky.android.rxjava.R
@@ -15,6 +16,7 @@ import io.reactivex.Flowable
 import io.reactivex.functions.Consumer
 import io.reactivex.functions.Function
 import org.reactivestreams.Publisher
+import timber.log.Timber
 import java.util.*
 import java.util.concurrent.Callable
 
@@ -24,14 +26,16 @@ class UsingFragment : BaseFragment() {
     private lateinit var _logsList: ListView
     private lateinit var _adapter: UsingFragment.LogAdapter
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_buffer, container, false)
-        _logsList = view?.findViewById(R.id.list_threading_log) as ListView
+        _logsList = view?.findViewById<View>(R.id.list_threading_log) as ListView
 
-        (view.findViewById(R.id.text_description) as TextView).setText(R.string.msg_demo_using)
+        view.findViewById<TextView>(R.id.text_description).setText(R.string.msg_demo_using)
 
         _setupLogger()
-        view.findViewById(R.id.btn_start_operation).setOnClickListener { executeUsingOperation() }
+
+        view.findViewById<Button>(R.id.btn_start_operation).setOnClickListener { _ -> executeUsingOperation() }
+
         return view
     }
 
@@ -85,7 +89,12 @@ class UsingFragment : BaseFragment() {
 
     private fun _setupLogger() {
         _logs = ArrayList<String>()
-        _adapter = LogAdapter(activity, ArrayList<String>())
+        val checkedActivity = activity
+        if (checkedActivity == null) {
+            Timber.e(NullPointerException("missing fragment activity"))
+            return
+        }
+        _adapter = LogAdapter(checkedActivity, ArrayList<String>())
         _logsList.adapter = _adapter
     }
 

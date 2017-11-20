@@ -4,7 +4,7 @@
     <string name="app_name">Android-RxJava</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="github_oauth_token"><!-- InsertYouroAuthTokenHere --></string>
+    <string name="github_oauth_token">ba2630b0805f3e8631fafbb57ca73269835de796</string>
 
     <string name="btn_demo_schedulers">bg work (schedulers &amp; concurrency)</string>
     <string name="btn_demo_buffer">accumulate calls (buffer)</string>
@@ -21,7 +21,7 @@
     <string name="btn_demo_rotation_persist">Rotation persist</string>
     <string name="btn_demo_volley">Volley request demo</string>
     <string name="btn_demo_pagination">Paging example</string>
-    <string name="btn_demo_pagination_more">MOAR</string>
+    <string name="btn_demo_pagination_more">MORE</string>
     <string name="btn_demo_networkDetector">Network Detector (Subject)</string>
     <string name="btn_demo_using">Setup &amp; teardown resources (using)</string>
     <string name="btn_demo_multicastPlayground">MultiConnect operator playground</string>

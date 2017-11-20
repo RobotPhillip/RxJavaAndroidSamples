@@ -36,11 +36,15 @@ class RotationPersist3Fragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedViewModel = ViewModelProviders.of(activity).get(SharedViewModel::class.java)
+        val checkedActivity = activity
+        if (checkedActivity == null) {
+            Timber.e(NullPointerException("missing fragment activity"))
+            return
+        }
+        sharedViewModel = ViewModelProviders.of(checkedActivity).get(SharedViewModel::class.java)
     }
 
-    override fun onCreateView(
-            inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val layout = inflater!!.inflate(R.layout.fragment_rotation_persist, container, false)
         ButterKnife.bind(this, layout)
         return layout

@@ -59,10 +59,10 @@
             android:text="@string/btn_demo_polling" />
 
         <Button
-            android:id="@+id/btn_demo_rxbus"
+            android:id="@+id/btn_demo_exponential_backoff"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="@string/btn_demo_rxbus"
+            android:text="@string/btn_demo_exponential_backoff"
             />
 
         <Button
@@ -87,17 +87,10 @@
             />
 
         <Button
-            android:id="@+id/btn_demo_timeout"
+            android:id="@+id/btn_demo_rxbus"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="@string/btn_demo_timeout"
-            />
-
-        <Button
-            android:id="@+id/btn_demo_exponential_backoff"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:text="@string/btn_demo_exponential_backoff"
+            android:text="@string/btn_demo_rxbus"
             />
 
         <Button
@@ -122,10 +115,10 @@
             />
 
         <Button
-            android:id="@+id/btn_demo_networkDetector"
+            android:id="@+id/btn_demo_timeout"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="@string/btn_demo_networkDetector"
+            android:text="@string/btn_demo_timeout"
             />
 
         <Button
@@ -140,6 +133,13 @@
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
             android:text="@string/btn_demo_multicastPlayground"
+            />
+
+        <Button
+            android:id="@+id/btn_demo_networkDetector"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:text="@string/btn_demo_networkDetector"
             />
     </LinearLayout>
 </ScrollView>

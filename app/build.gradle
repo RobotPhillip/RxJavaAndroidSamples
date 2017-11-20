@@ -1,65 +1,93 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.f2prateek.javafmt'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+project.ext {
+    kotlinVersion = "1.1.60"
+
+    archComponentsVersion = "1.0.0"
+    butterKnifeVersion = '8.8.1'
+    mockitoKotlinVersion = "1.4.0"
+    okhttpVersion = "3.0.1"
+    retrofitVersion = "2.0.0"
+    timberVersion = "4.6.0"
+
+    // android versions
+    multidexLibVersion = "1.0.2"
+    supportLibVersion = "27.0.0"
+
+    // rxjava versions
+    rxJavaLibVersion = "2.1.6"
+    rxAndroidLibVersion = "2.0.1"
+    jakewhartonReplayShareKotlinLibVersion = "2.0.0"
+    rxJavaExtensionsLibVersion = "0.16.0"
+    jakewhartonRxRelayLibVersion = "2.0.0"
+    jakewhartonRxBindingLibVersion = "2.0.0"
+    jakewhartonRetrofitRxJava2AdapterLibVersion = "1.0.0"
+
+    // leakcanary
+    leakCanaryLibVersion = "1.5.1"
+
+}
+
 buildscript {
     repositories {
-//        mavenCentral()
         jcenter()
     }
     dependencies {
-        classpath 'me.tatarka:gradle-retrolambda:3.6.0'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.1.60"
     }
 
     // Exclude the lombok version that the android plugin depends on.
     configurations.classpath.exclude group: 'com.android.tools.external.lombok'
 }
 
-apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'com.f2prateek.javafmt'
-apply plugin: 'kotlin-android'
-
 dependencies {
-    compile 'com.android.support:multidex:1.0.1'
-    compile "com.android.support:support-v13:${supportLibVersion}"
-    compile "com.android.support:appcompat-v7:${supportLibVersion}"
-    compile "com.android.support:recyclerview-v7:${supportLibVersion}"
+    implementation "com.android.support:multidex:${multidexLibVersion}"
 
-    compile 'com.github.kaushikgopal:CoreTextUtils:c703fa12b6'
-    compile "com.jakewharton:butterknife:${butterKnifeVersion}"
+    // sdk 27 dependenciesds
+//    implementation "com.android.support:support-v7:${supportLibVersion}"
+//    implementation "com.android.support:design:${supportLibVersion}"
+
+    implementation "com.android.support:appcompat-v7:${supportLibVersion}"
+    implementation "com.android.support:recyclerview-v7:${supportLibVersion}"
+    implementation 'com.github.kaushikgopal:CoreTextUtils:c703fa12b6'
+    implementation "com.jakewharton:butterknife:${butterKnifeVersion}"
     kapt "com.jakewharton:butterknife-compiler:${butterKnifeVersion}"
-    compile 'com.jakewharton.timber:timber:4.5.1'
-    compile "com.squareup.retrofit2:retrofit:${retrofitVersion}"
-    compile "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
-    compile "com.squareup.okhttp3:okhttp:${okhttpVersion}"
-    compile "com.squareup.okhttp3:okhttp-urlconnection:${okhttpVersion}"
-    compile 'com.mcxiaoke.volley:library:1.0.19'
+    implementation "com.jakewharton.timber:timber:${timberVersion}"
+    implementation "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    implementation "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    implementation "com.squareup.okhttp3:okhttp:${okhttpVersion}"
+    implementation "com.squareup.okhttp3:okhttp-urlconnection:${okhttpVersion}"
+    implementation 'com.mcxiaoke.volley:library:1.0.19'
 
-    compile "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
-    compile "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}"
-
-    compile "android.arch.lifecycle:runtime:${archComponentsVersion}"
-    compile "android.arch.lifecycle:extensions:${archComponentsVersion}"
-    kapt  "android.arch.lifecycle:compiler:${archComponentsVersion}"
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}"
+    implementation "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
+    implementation "com.nhaarman:mockito-kotlin:${mockitoKotlinVersion}"
+    implementation "android.arch.lifecycle:runtime:${archComponentsVersion}"
+    implementation "android.arch.lifecycle:extensions:${archComponentsVersion}"
+    kapt "android.arch.lifecycle:compiler:${archComponentsVersion}"
 
     // ----------------------------------
-    //  Rx dependencies
 
-    compile 'io.reactivex.rxjava2:rxjava:2.0.7'
+    //  Rx dependencies
+    implementation "io.reactivex.rxjava2:rxjava:${rxJavaLibVersion}"
 
     // Because RxAndroid releases are few and far between, it is recommended you also
+
     // explicitly depend on RxJava's latest version for bug fixes and new features.
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-
-    compile 'com.jakewharton.rx:replaying-share-kotlin:2.0.0'
-    compile "com.github.akarnokd:rxjava2-extensions:0.16.0"
-    compile 'com.jakewharton.rxrelay2:rxrelay:2.0.0'
-
-    compile 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
-    compile 'com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+    implementation "io.reactivex.rxjava2:rxandroid:${rxAndroidLibVersion}"
+    implementation "com.jakewharton.rx:replaying-share-kotlin:${jakewhartonReplayShareKotlinLibVersion}"
+    implementation "com.github.akarnokd:rxjava2-extensions:${rxJavaExtensionsLibVersion}"
+    implementation "com.jakewharton.rxrelay2:rxrelay:${jakewhartonRxRelayLibVersion}"
+    implementation "com.jakewharton.rxbinding2:rxbinding:${jakewhartonRxBindingLibVersion}"
+    implementation "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${jakewhartonRetrofitRxJava2AdapterLibVersion}"
 
     // ----------------------------------
-
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.1'
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${leakCanaryLibVersion}"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryLibVersion}"
 }
 
 android {
@@ -88,6 +116,9 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     packagingOptions {
-        pickFirst  'META-INF/rxjava.properties'
+        pickFirst 'META-INF/rxjava.properties'
+    }
+    lintOptions {
+        abortOnError false
     }
 }
